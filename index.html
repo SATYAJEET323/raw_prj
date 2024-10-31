@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>My Source Code</title>
+    <style>
+        body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #0e0e0e; /* Dark background */
+    color: #00ff00; /* Neon green text */
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: #1a1a1a; /* Slightly lighter background for the container */
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5); /* Neon green shadow */
+}
+
+h1 {
+    text-align: center;
+    color: #00ff00; /* Neon green for the title */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Shadow effect */
+}
+
+h2 {
+    color: #00ff00; /* Neon green for section titles */
+    margin-top: 20px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Shadow effect */
+}
+
+.code-section {
+    margin-bottom: 30px;
+}
+
+pre {
+    background-color: #0d0d0d; /* Darker background for code blocks */
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+    border: 1px solid #00ff00; /* Neon green border */
+}
+
+code {
+    white-space: pre-wrap; /* Allows long lines to wrap */
+    color: #00ff00; /* Neon green for code */
+}
+
+code::selection {
+    background: rgba(0, 255, 0, 0.5); /* Highlight color for selected text */
+    color: black; /* Text color on highlight */
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>My Source Code </h1>
+        
+        <div class="code-section">
+            <h2>yolo_model.py</h2>
+            <pre>
+<code>
+from ultralytics import YOLO
+
+def load_yolo_model():
+    # Load YOLOv8 model (pre-trained on COCO dataset)
+    model = YOLO("yolov8n.pt")  # Use the appropriate model
+    return model
+
+def detect_objects(model, frame):
+    # Perform object detection
+    results = model(frame)
+    return results
+</code>
+            </pre>
+        </div>
+
+        <div class="code-section">
+            <h2>distance_calculator.py</h2>
+            <pre>
+<code>
+def calculate_distance(focal_length, real_width, box_width):
+    """
+    Calculate the distance based on the object width in the image.
+    - focal_length: Camera focal length (pre-determined or estimated)
+    - real_width: Known real width of the object
+    - box_width: Width of the bounding box (in pixels)
+    """
+    if box_width == 0:
+        return None  # Avoid division by zero
+    distance = (real_width * focal_length) / box_width
+    return distance
+
+def estimate_focal_length(known_distance, known_width, box_width):
+    """
+    Estimate the focal length based on known distance and object size.
+    """
+    focal_length = (box_width * known_distance) / known_width
+    return focal_length
+</code>
+            </pre>
+        </div>
+
+        <div class="code-section">
+            <h2>main.py</h2>
+            <pre>
+<code>
+import cv2
+from yolo_model import load_yolo_model, detect_objects
+from distance_calculator import calculate_distance
+
+# Initialize constants
+KNOWN_DISTANCE = 50  # Known distance to the object (in cm)
+KNOWN_WIDTH = 20     # Known width of the object (in cm)
+
+# Manually calibrated focal length; you may need to calibrate this for your setup
+FOCAL_LENGTH = 500   # Adjust based on your camera calibration
+
+def main():
+    # Load YOLO model
+    model = load_yolo_model()
+    
+    # Initialize video capture
+    cap = cv2.VideoCapture(0)  # '0' for default camera
+
+    while cap.isOpened():
+        ret, frame = cap.read()
+        if not ret:
+            break
+
+        # Detect objects
+        results = detect_objects(model, frame)
+
+        # Process detection results
+        for result in results:
+            for box in result.boxes:
+                x1, y1, x2, y2 = map(int, box.xyxy[0])  # Get bounding box coordinates
+                box_width = x2 - x1  # Width of the bounding box
+
+                # Get the label for the detected object
+                label = result.names[int(box.cls[0])]  # Get class name
+
+                # Calculate distance
+                distance = calculate_distance(FOCAL_LENGTH, KNOWN_WIDTH, box_width)
+
+                # Display bounding box and distance
+                cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
+                display_label = f"{label}: {distance:.2f} cm" if distance else f"{label}: Unknown distance"
+                cv2.putText(frame, display_label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+
+        # Display the frame
+        cv2.imshow("Object Detection and Distance Estimation", frame)
+
+        # Press 'q' to quit
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+    cap.release()
+    cv2.destroyAllWindows()
+
+if __name__ == "__main__":
+    main()
+</code>
+            </pre>
+        </div>
+    </div>
+</body>
+</html>
