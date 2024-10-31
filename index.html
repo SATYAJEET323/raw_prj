@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>My Source Code</title>
+    <title>Raw Project</title>
     <style>
         body {
     font-family: 'Courier New', Courier, monospace;
@@ -57,15 +57,38 @@ code::selection {
     color: black; /* Text color on highlight */
 }
 
+/* Button Styles */
+.copy-button {
+    background-color: #00ff00; /* Neon green background */
+    color: #0e0e0e; /* Dark text */
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+    margin-top: 10px; /* Space above button */
+    display: inline-block; /* Align button with the code block */
+}
+
+.copy-button:hover {
+    background-color: #00cc00; /* Darker green on hover */
+    transform: scale(1.05); /* Slightly enlarge the button */
+}
+
+.copy-button:active {
+    transform: scale(0.95); /* Slightly shrink the button on click */
+}
+
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>My Source Code </h1>
+        <h1>Raw Project</h1>
         
         <div class="code-section">
             <h2>yolo_model.py</h2>
-            <pre>
+            <pre id="code-yolo">
 <code>
 from ultralytics import YOLO
 
@@ -80,11 +103,12 @@ def detect_objects(model, frame):
     return results
 </code>
             </pre>
+            <button class="copy-button" onclick="copyToClipboard('code-yolo')">Copy Code</button>
         </div>
 
         <div class="code-section">
             <h2>distance_calculator.py</h2>
-            <pre>
+            <pre id="code-distance">
 <code>
 def calculate_distance(focal_length, real_width, box_width):
     """
@@ -106,11 +130,12 @@ def estimate_focal_length(known_distance, known_width, box_width):
     return focal_length
 </code>
             </pre>
+            <button class="copy-button" onclick="copyToClipboard('code-distance')">Copy Code</button>
         </div>
 
         <div class="code-section">
             <h2>main.py</h2>
-            <pre>
+            <pre id="code-main">
 <code>
 import cv2
 from yolo_model import load_yolo_model, detect_objects
@@ -169,7 +194,19 @@ if __name__ == "__main__":
     main()
 </code>
             </pre>
+            <button class="copy-button" onclick="copyToClipboard('code-main')">Copy Code</button>
         </div>
     </div>
+
+    <script>
+        function copyToClipboard(codeId) {
+            const codeBlock = document.getElementById(codeId).innerText;
+            navigator.clipboard.writeText(codeBlock).then(() => {
+                alert("Code copied to clipboard!");
+            }).catch(err => {
+                console.error("Failed to copy: ", err);
+            });
+        }
+    </script>
 </body>
 </html>
