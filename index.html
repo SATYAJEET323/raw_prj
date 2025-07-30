@@ -3,97 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
     <title>Raw Project</title>
     <style>
         body {
-    font-family: 'Courier New', Courier, monospace;
-    background: linear-gradient(135deg, #1a001a 0%, #0e0e0e 50%, #330000 100%);
-    color: #ff7b00; /* Orange text */
-    margin: 0;
-    padding: 20px;
-}
+            font-family: 'Courier New', Courier, monospace;
+            background: linear-gradient(135deg, #1a001a 0%, #0e0e0e 50%, #330000 100%);
+            color: #ff7b00;
+            margin: 0;
+            padding: 20px;
+        }
 
-.container {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-    background: rgba(30, 0, 20, 0.8); /* Dark purple background */
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(255, 60, 0, 0.6); /* Orange glow */
-    border: 1px solid #ff3c00;
-}
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: rgba(30, 0, 20, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(255, 60, 0, 0.6);
+            border: 1px solid #ff3c00;
+        }
 
-h1 {
-    text-align: center;
-    color: #ff7b00;
-    text-shadow: 0 0 10px rgba(255, 123, 0, 0.7), 
-                 0 0 20px rgba(255, 60, 0, 0.5);
-    background: linear-gradient(90deg, #ff3c00, #ff00aa, #ff3c00);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    letter-spacing: 1px;
-}
+        h1 {
+            text-align: center;
+            color: #ff7b00;
+            text-shadow: 0 0 10px rgba(255, 123, 0, 0.7), 
+                         0 0 20px rgba(255, 60, 0, 0.5);
+            background: linear-gradient(90deg, #ff3c00, #ff00aa, #ff3c00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
 
-h2 {
-    color: #ff5e00;
-    margin-top: 20px;
-    text-shadow: 0 0 5px rgba(255, 94, 0, 0.5);
-    border-bottom: 1px solid #ff3c00;
-    padding-bottom: 5px;
-}
+        h2 {
+            color: #ff5e00;
+            margin-top: 20px;
+            text-shadow: 0 0 5px rgba(255, 94, 0, 0.5);
+            border-bottom: 1px solid #ff3c00;
+            padding-bottom: 5px;
+        }
 
-.code-section {
-    margin-bottom: 30px;
-}
+        .code-section {
+            margin-bottom: 30px;
+        }
 
-pre {
-    background: linear-gradient(145deg, #1a001a 0%, #0d0d0d 100%);
-    padding: 15px;
-    border-radius: 5px;
-    overflow-x: auto;
-    border: 1px solid #ff3c00;
-    box-shadow: inset 0 0 10px rgba(255, 60, 0, 0.3);
-}
+        pre {
+            background: linear-gradient(145deg, #1a001a 0%, #0d0d0d 100%);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border: 1px solid #ff3c00;
+            box-shadow: inset 0 0 10px rgba(255, 60, 0, 0.3);
+        }
 
-code {
-    white-space: pre-wrap;
-    color: #ff7b00;
-    text-shadow: 0 0 5px rgba(255, 123, 0, 0.3);
-}
+        /* Multi-color syntax highlighting */
+        code {
+            white-space: pre-wrap;
+            text-shadow: 0 0 5px rgba(255, 123, 0, 0.3);
+        }
 
-code::selection {
-    background: rgba(255, 60, 0, 0.5);
-    color: white;
-}
+        /* Keywords (def, import, return, etc.) */
+        code .keyword {
+            color: #ff5e00; /* Orange */
+            font-weight: bold;
+        }
 
-/* Button Styles */
-.copy-button {
-    background: linear-gradient(145deg, #ff3c00, #ff00aa);
-    color: #0e0e0e;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: all 0.3s;
-    margin-top: 10px;
-    display: inline-block;
-    font-weight: bold;
-    box-shadow: 0 0 10px rgba(255, 60, 0, 0.5);
-}
+        /* Strings */
+        code .string {
+            color: #00ffaa; /* Teal */
+        }
 
-.copy-button:hover {
-    background: linear-gradient(145deg, #ff5e00, #ff00cc);
-    transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(255, 60, 0, 0.7);
-}
+        /* Comments */
+        code .comment {
+            color: #ff00aa; /* Pink */
+            font-style: italic;
+        }
 
-.copy-button:active {
-    transform: scale(0.95);
-    box-shadow: 0 0 5px rgba(255, 60, 0, 0.5);
-}
+        /* Functions */
+        code .function {
+            color: #ffcc00; /* Yellow */
+        }
+
+        /* Parameters/Punctuation */
+        code .param {
+            color: #aa00ff; /* Purple */
+        }
+
+        /* Numbers */
+        code .number {
+            color: #00aaff; /* Blue */
+        }
+
+        /* Operators */
+        code .operator {
+            color: #ff3c00; /* Bright orange */
+        }
+
+        code::selection {
+            background: rgba(255, 60, 0, 0.5);
+            color: white;
+        }
+
+        /* Button Styles */
+        .copy-button {
+            background: linear-gradient(145deg, #ff3c00, #ff00aa);
+            color: #0e0e0e;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+            margin-top: 10px;
+            display: inline-block;
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(255, 60, 0, 0.5);
+        }
+
+        .copy-button:hover {
+            background: linear-gradient(145deg, #ff5e00, #ff00cc);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 60, 0, 0.7);
+        }
+
+        .copy-button:active {
+            transform: scale(0.95);
+            box-shadow: 0 0 5px rgba(255, 60, 0, 0.5);
+        }
     </style>
 </head>
 <body>
@@ -104,17 +140,17 @@ code::selection {
             <h2>yolo_model.py</h2>
             <pre id="code-yolo">
 <code>
-from ultralytics import YOLO
+<span class="keyword">from</span> <span class="param">ultralytics</span> <span class="keyword">import</span> <span class="param">YOLO</span>
 
-def load_yolo_model():
-    # Load YOLOv8 model (pre-trained on COCO dataset)
-    model = YOLO("yolov8n.pt")  # Use the appropriate model
-    return model
+<span class="keyword">def</span> <span class="function">load_yolo_model</span>():
+    <span class="comment"># Load YOLOv8 model (pre-trained on COCO dataset)</span>
+    <span class="param">model</span> <span class="operator">=</span> <span class="function">YOLO</span>(<span class="string">"yolov8n.pt"</span>)  <span class="comment"># Use the appropriate model</span>
+    <span class="keyword">return</span> <span class="param">model</span>
 
-def detect_objects(model, frame):
-    # Perform object detection
-    results = model(frame)
-    return results
+<span class="keyword">def</span> <span class="function">detect_objects</span>(<span class="param">model</span>, <span class="param">frame</span>):
+    <span class="comment"># Perform object detection</span>
+    <span class="param">results</span> <span class="operator">=</span> <span class="param">model</span>(<span class="param">frame</span>)
+    <span class="keyword">return</span> <span class="param">results</span>
 </code>
             </pre>
             <button class="copy-button" onclick="copyToClipboard('code-yolo')">Copy Code</button>
@@ -124,24 +160,24 @@ def detect_objects(model, frame):
             <h2>distance_calculator.py</h2>
             <pre id="code-distance">
 <code>
-def calculate_distance(focal_length, real_width, box_width):
-    """
+<span class="keyword">def</span> <span class="function">calculate_distance</span>(<span class="param">focal_length</span>, <span class="param">real_width</span>, <span class="param">box_width</span>):
+    <span class="comment">"""
     Calculate the distance based on the object width in the image.
     - focal_length: Camera focal length (pre-determined or estimated)
     - real_width: Known real width of the object
     - box_width: Width of the bounding box (in pixels)
-    """
-    if box_width == 0:
-        return None  # Avoid division by zero
-    distance = (real_width * focal_length) / box_width
-    return distance
+    """</span>
+    <span class="keyword">if</span> <span class="param">box_width</span> <span class="operator">==</span> <span class="number">0</span>:
+        <span class="keyword">return</span> <span class="param">None</span>  <span class="comment"># Avoid division by zero</span>
+    <span class="param">distance</span> <span class="operator">=</span> (<span class="param">real_width</span> <span class="operator">*</span> <span class="param">focal_length</span>) <span class="operator">/</span> <span class="param">box_width</span>
+    <span class="keyword">return</span> <span class="param">distance</span>
 
-def estimate_focal_length(known_distance, known_width, box_width):
-    """
+<span class="keyword">def</span> <span class="function">estimate_focal_length</span>(<span class="param">known_distance</span>, <span class="param">known_width</span>, <span class="param">box_width</span>):
+    <span class="comment">"""
     Estimate the focal length based on known distance and object size.
-    """
-    focal_length = (box_width * known_distance) / known_width
-    return focal_length
+    """</span>
+    <span class="param">focal_length</span> <span class="operator">=</span> (<span class="param">box_width</span> <span class="operator">*</span> <span class="param">known_distance</span>) <span class="operator">/</span> <span class="param">known_width</span>
+    <span class="keyword">return</span> <span class="param">focal_length</span>
 </code>
             </pre>
             <button class="copy-button" onclick="copyToClipboard('code-distance')">Copy Code</button>
@@ -151,84 +187,79 @@ def estimate_focal_length(known_distance, known_width, box_width):
             <h2>main.py</h2>
             <pre id="code-main">
 <code>
-import cv2
-from yolo_model import load_yolo_model, detect_objects
-from distance_calculator import calculate_distance
+<span class="keyword">import</span> <span class="param">cv2</span>
+<span class="keyword">from</span> <span class="param">yolo_model</span> <span class="keyword">import</span> <span class="param">load_yolo_model</span>, <span class="param">detect_objects</span>
+<span class="keyword">from</span> <span class="param">distance_calculator</span> <span class="keyword">import</span> <span class="param">calculate_distance</span>
 
-# Initialize constants
-KNOWN_DISTANCE = 50  # Known distance to the object (in cm)
-KNOWN_WIDTH = 20     # Known width of the object (in cm)
+<span class="comment"># Initialize constants</span>
+<span class="param">KNOWN_DISTANCE</span> <span class="operator">=</span> <span class="number">50</span>  <span class="comment"># Known distance to the object (in cm)</span>
+<span class="param">KNOWN_WIDTH</span> <span class="operator">=</span> <span class="number">20</span>     <span class="comment"># Known width of the object (in cm)</span>
 
-# Manually calibrated focal length; you may need to calibrate this for your setup
-FOCAL_LENGTH = 500   # Adjust based on your camera calibration
+<span class="comment"># Manually calibrated focal length; you may need to calibrate this for your setup</span>
+<span class="param">FOCAL_LENGTH</span> <span class="operator">=</span> <span class="number">500</span>   <span class="comment"># Adjust based on your camera calibration</span>
 
-def main():
-    # Load YOLO model
-    model = load_yolo_model()
+<span class="keyword">def</span> <span class="function">main</span>():
+    <span class="comment"># Load YOLO model</span>
+    <span class="param">model</span> <span class="operator">=</span> <span class="function">load_yolo_model</span>()
     
-    # Initialize video capture
-    cap = cv2.VideoCapture(0)  # '0' for default camera
+    <span class="comment"># Initialize video capture</span>
+    <span class="param">cap</span> <span class="operator">=</span> <span class="function">cv2.VideoCapture</span>(<span class="number">0</span>)  <span class="comment"># '0' for default camera</span>
 
-    while cap.isOpened():
-        ret, frame = cap.read()
-        if not ret:
-            break
+    <span class="keyword">while</span> <span class="param">cap</span>.<span class="function">isOpened</span>():
+        <span class="param">ret</span>, <span class="param">frame</span> <span class="operator">=</span> <span class="param">cap</span>.<span class="function">read</span>()
+        <span class="keyword">if</span> <span class="operator">not</span> <span class="param">ret</span>:
+            <span class="keyword">break</span>
 
-        # Detect objects
-        results = detect_objects(model, frame)
+        <span class="comment"># Detect objects</span>
+        <span class="param">results</span> <span class="operator">=</span> <span class="function">detect_objects</span>(<span class="param">model</span>, <span class="param">frame</span>)
 
-        # Process detection results
-        for result in results:
-            for box in result.boxes:
-                x1, y1, x2, y2 = map(int, box.xyxy[0])  # Get bounding box coordinates
-                box_width = x2 - x1  # Width of the bounding box
+        <span class="comment"># Process detection results</span>
+        <span class="keyword">for</span> <span class="param">result</span> <span class="keyword">in</span> <span class="param">results</span>:
+            <span class="keyword">for</span> <span class="param">box</span> <span class="keyword">in</span> <span class="param">result</span>.<span class="param">boxes</span>:
+                <span class="param">x1</span>, <span class="param">y1</span>, <span class="param">x2</span>, <span class="param">y2</span> <span class="operator">=</span> <span class="function">map</span>(<span class="param">int</span>, <span class="param">box</span>.<span class="param">xyxy</span>[<span class="number">0</span>])  <span class="comment"># Get bounding box coordinates</span>
+                <span class="param">box_width</span> <span class="operator">=</span> <span class="param">x2</span> <span class="operator">-</span> <span class="param">x1</span>  <span class="comment"># Width of the bounding box</span>
 
-                # Get the label for the detected object
-                label = result.names[int(box.cls[0])]  # Get class name
+                <span class="comment"># Get the label for the detected object</span>
+                <span class="param">label</span> <span class="operator">=</span> <span class="param">result</span>.<span class="param">names</span>[<span class="function">int</span>(<span class="param">box</span>.<span class="param">cls</span>[<span class="number">0</span>])]  <span class="comment"># Get class name</span>
 
-                # Calculate distance
-                distance = calculate_distance(FOCAL_LENGTH, KNOWN_WIDTH, box_width)
+                <span class="comment"># Calculate distance</span>
+                <span class="param">distance</span> <span class="operator">=</span> <span class="function">calculate_distance</span>(<span class="param">FOCAL_LENGTH</span>, <span class="param">KNOWN_WIDTH</span>, <span class="param">box_width</span>)
 
-                # Display bounding box and distance
-                cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
-                display_label = f"{label}: {distance:.2f} cm" if distance else f"{label}: Unknown distance"
-                cv2.putText(frame, display_label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+                <span class="comment"># Display bounding box and distance</span>
+                <span class="function">cv2.rectangle</span>(<span class="param">frame</span>, (<span class="param">x1</span>, <span class="param">y1</span>), (<span class="param">x2</span>, <span class="param">y2</span>), (<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>), <span class="number">2</span>)
+                <span class="param">display_label</span> <span class="operator">=</span> <span class="string">f"{label}: {distance:.2f} cm"</span> <span class="keyword">if</span> <span class="param">distance</span> <span class="keyword">else</span> <span class="string">f"{label}: Unknown distance"</span>
+                <span class="function">cv2.putText</span>(<span class="param">frame</span>, <span class="param">display_label</span>, (<span class="param">x1</span>, <span class="param">y1</span> <span class="operator">-</span> <span class="number">10</span>), <span class="param">cv2.FONT_HERSHEY_SIMPLEX</span>, <span class="number">0.5</span>, (<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>), <span class="number">2</span>)
 
-        # Display the frame
-        cv2.imshow("Object Detection and Distance Estimation", frame)
+        <span class="comment"># Display the frame</span>
+        <span class="function">cv2.imshow</span>(<span class="string">"Object Detection and Distance Estimation"</span>, <span class="param">frame</span>)
 
-        # Press 'q' to quit
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
+        <span class="comment"># Press 'q' to quit</span>
+        <span class="keyword">if</span> <span class="function">cv2.waitKey</span>(<span class="number">1</span>) <span class="operator">&</span> <span class="number">0xFF</span> <span class="operator">==</span> <span class="function">ord</span>(<span class="string">'q'</span>):
+            <span class="keyword">break</span>
 
-    cap.release()
-    cv2.destroyAllWindows()
+    <span class="param">cap</span>.<span class="function">release</span>()
+    <span class="function">cv2.destroyAllWindows</span>()
 
-if __name__ == "__main__":
-    main()
+<span class="keyword">if</span> <span class="param">__name__</span> <span class="operator">==</span> <span class="string">"__main__"</span>:
+    <span class="function">main</span>()
 </code>
-
             </pre>
             <button class="copy-button" onclick="copyToClipboard('code-main')">Copy Code</button>
         </div>
     
-    
-    <div class="code-section">
-        <h2>reqirements.txt</h2>
-        <pre id="code-reqirements">
+        <div class="code-section">
+            <h2>requirements.txt</h2>
+            <pre id="code-requirements">
 <code>
-    # To install the required libraries, run the following commands:
+<span class="comment"># To install the required libraries, run the following commands:</span>
 
-    pip install ultralytics
-    pip install opencv-python
+<span class="keyword">pip</span> <span class="function">install</span> <span class="param">ultralytics</span>
+<span class="keyword">pip</span> <span class="function">install</span> <span class="param">opencv-python</span>
 </code>
-
-        </pre>
-        <button class="copy-button" onclick="copyToClipboard('code-main')">Copy Code</button>
+            </pre>
+            <button class="copy-button" onclick="copyToClipboard('code-requirements')">Copy Code</button>
+        </div>
     </div>
-</div>
-
-    
 
     <script>
         function copyToClipboard(codeId) {
